@@ -30,3 +30,5 @@ class NotFoundError extends AppError {
         super(message, 404, code);
     }
 }
+
+module.exports = {AppError,BadRequestError,UnauthorizedError,ForbiddenError,NotFoundError};

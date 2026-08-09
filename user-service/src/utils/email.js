@@ -1,5 +1,4 @@
-const { config } = require('../config');
-
+const { config } = require("../config");
 const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 
@@ -10,27 +9,14 @@ const minutes = (config.OTP_TTL || 300) / 60;
 async function sendOtpEmail(email, otp) {
     const msg = {
         to: email,
-        from: `${config.MAIL_SEND}`,
-        subject: 'Your DesignKarlo verification code',
+        from: config.MAIL_SEND,
+        subject: "Your DesignKarlo verification code",
         html: `
-            <div style="
-                font-family: Arial, sans-serif;
-                max-width: 420px;
-                margin: auto;
-                padding: 20px;
-                border: 1px solid #e5e5e5;
-                border-radius: 10px;
-                background: #ffffff;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            ">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <h2 style="color: #4A3AFF; margin: 0;">DesignKarlo</h2>
-                </div>
-
+            <div>
+                <h2>DesignKarlo</h2>
                 <p style="font-size: 15px; color: #555;">
                     Your verification code is:
                 </p>
-
                 <div style="
                     text-align: center;
                     font-size: 28px;
@@ -44,7 +30,6 @@ async function sendOtpEmail(email, otp) {
                 ">
                     ${otp}
                 </div>
-
                 <p style="font-size: 15px; color: #555;">
                     This code will expire in <strong>${minutes} minutes</strong>.
                 </p>
@@ -52,29 +37,27 @@ async function sendOtpEmail(email, otp) {
         `
     };
 
-    await sgMail.send(msg);
+    try {
+        await sgMail.send(msg);
+        console.log("OTP email sent successfully");
+    } catch (error) {
+        console.log(
+            "SENDGRID ERROR:",
+            JSON.stringify(error.response?.body, null, 2)
+        );
+        throw error;
+    }
 }
 
 async function verifyOtpEmail(meta) {
     const msg = {
         to: meta.email,
-        from: `${config.MAIL_SEND}`,
-        subject: 'Welcome to DesignKarlo, Email Verified',
+        from: config.MAIL_SEND,
+        subject: "Welcome to DesignKarlo, Email Verified",
         html: `
-            <div style="
-                font-family: Arial, sans-serif;
-                max-width: 420px;
-                margin: auto;
-                padding: 20px;
-            ">
-                <h2 style="color: #4A3AFF;">
-                    Email Verified Successfully
-                </h2>
-
-                <p>
-                    Hello ${meta.name || ''},
-                </p>
-
+            <div>
+                <h2>Email Verified Successfully</h2>
+                <p>Hello ${meta.name || ""},</p>
                 <p>
                     Your email has been successfully verified.
                     Welcome to DesignKarlo!
@@ -83,5 +66,19 @@ async function verifyOtpEmail(meta) {
         `
     };
 
-    await sgMail.send(msg);
+    try {
+        await sgMail.send(msg);
+        console.log("Verification email sent successfully");
+    } catch (error) {
+        console.log(
+            "SENDGRID ERROR:",
+            JSON.stringify(error.response?.body, null, 2)
+        );
+        throw error;
+    }
 }
+
+module.exports = {
+    sendOtpEmail,
+    verifyOtpEmail
+};

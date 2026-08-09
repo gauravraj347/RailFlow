@@ -13,3 +13,5 @@ if (!globalForPrisma.prisma) {
         log: ['error', 'warn'],
     });
 }
+
+module.exports = globalForPrisma.prisma;

@@ -8,6 +8,7 @@ const logger = require('./config/logger');
 const { corsMiddleware } = require('./middlewares/cors.middleware');
 const { reqLogger } = require('./middlewares/req.middleware');
 const errorHandler = require('./middlewares/error.middleware');
+const authRoutes = require('./routes/auth.route')
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(corsMiddleware);
 app.use(reqLogger);
 app.use(cookieParser());
 app.use(express.json());
+app.use("/api/v1/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.send("Hello from index.js of user-service");
