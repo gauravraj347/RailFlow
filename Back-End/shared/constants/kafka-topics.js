@@ -6,6 +6,16 @@ const KAFKA_TOPICS = {
      // Notification topics (user-service -> notification-service)
      OTP_EMAIL: 'notification.otp-email',
      WELCOME_EMAIL: 'notification.welcome-email',
+
+     // Admin topics (admin-service -> inventory/search)
+     TRAIN_CREATED: 'admin.train-created',
+     STATION_CREATED: 'admin.station-created',
+     ROUTE_CREATED: 'admin.route-created',
+     SCHEDULE_CREATED: 'admin.schedule-created',
+     TRAIN_UPDATED: 'admin.train-updated',
+     STATION_UPDATED: 'admin.station-updated',
+     ROUTE_UPDATED: 'admin.route-updated',
+     SCHEDULE_CANCELLED: 'admin.schedule-cancelled',
    
      // Dead-letter queues (per service — poison messages land here)
      DLQ_BOOKING: 'dlq.booking-service',
