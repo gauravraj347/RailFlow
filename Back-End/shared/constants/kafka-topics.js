@@ -16,6 +16,9 @@ const KAFKA_TOPICS = {
      STATION_UPDATED: 'admin.station-updated',
      ROUTE_UPDATED: 'admin.route-updated',
      SCHEDULE_CANCELLED: 'admin.schedule-cancelled',
+
+     // Inventory topics (inventory-service -> search-service)
+     SEAT_AVAILABILITY_UPDATED: 'inventory.seat-availability-updated',
    
      // Dead-letter queues (per service — poison messages land here)
      DLQ_BOOKING: 'dlq.booking-service',
