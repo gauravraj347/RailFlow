@@ -6,6 +6,7 @@ const KAFKA_TOPICS = {
      // Notification topics (user-service -> notification-service)
      OTP_EMAIL: 'notification.otp-email',
      WELCOME_EMAIL: 'notification.welcome-email',
+     BOOKING_EMAIL: 'notification.booking-email',
 
      // Admin topics (admin-service -> inventory/search)
      TRAIN_CREATED: 'admin.train-created',
@@ -19,6 +20,11 @@ const KAFKA_TOPICS = {
 
      // Inventory topics (inventory-service -> search-service)
      SEAT_AVAILABILITY_UPDATED: 'inventory.seat-availability-updated',
+
+     // Booking topics (booking-service -> notification-service)
+     BOOKING_CONFIRMED: 'booking.confirmed',
+     BOOKING_CANCELLED: 'booking.cancelled',
+     BOOKING_FAILED: 'booking.failed',
    
      // Dead-letter queues (per service — poison messages land here)
      DLQ_BOOKING: 'dlq.booking-service',
