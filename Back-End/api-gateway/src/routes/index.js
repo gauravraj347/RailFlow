@@ -121,6 +121,13 @@ router.get(
      adminServiceProxy
 );
 
+router.get(
+    '/admins/schedules/schedule',
+    requireAuth,
+    combinedRateLimit(),
+    adminServiceProxy
+);
+
 router.put(
      '/admins/schedules/schedule/:scheduleId',
      requireAuth,
