@@ -107,6 +107,12 @@ router.get(
      combinedRateLimit(),
      adminServiceProxy
 )
+router.get(
+  '/admins/trains/train',
+  requireAuth,
+  combinedRateLimit(),
+  adminServiceProxy
+);
 
 router.get(
      '/admins/trains/train/:trainId',
